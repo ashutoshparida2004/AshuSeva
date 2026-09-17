@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - ASHUTOSH SEVA</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <header class="dashboard-header">
+
+            <h1>ASHUTOSH SEVA
+                
+            </h1>
+
+            <p>Hospital Administration Dashboard</p>
+
+        </header>
+
+
+        <!-- Overview Cards -->
+
+        <section class="overview">
+
+            <div class="stat-card">
+
+                <h3>Total Patients</h3>
+
+                <div class="stat-number">
+                    {{ total_patients }}
+                </div>
+
+                <p>Registered Today</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Waiting Patients</h3>
+
+                <div class="stat-number">
+                    {{ waiting_patients }}
+                </div>
+
+                <p>Currently Waiting</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Currently Serving</h3>
+
+                <div class="stat-number">
+                    {{ serving_patients }}
+                </div>
+
+                <p>In Consultation</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Department Queue -->
+
+        <section class="queue-section">
+
+            <h2>Department-wise Queue</h2>
+
+            <div class="department-grid">
+
+                {% for department in departments %}
+
+                    <div class="department-card">
+
+                        <h3>{{ department[1] }}</h3>
+
+                        <p>
+                            Waiting Patients:
+                            <strong>{{ department[2] }}</strong>
+                        </p>
+
+                        <p>
+                            Estimated Wait:
+                            <strong>{{ department[4] }} minutes</strong>
+                        </p>
+
+                        <p>
+                            Now Serving:
+                            <strong>{{ department[3] }}</strong>
+                        </p>
+
+
+                        <form
+                            method="POST"
+                            action="/call-next/{{ department[0] }}"
+                        >
+
+                            <button type="submit">
+                                Call Next
+                            </button>
+
+                        </form>
+
+                        <br>
+
+
+                        <form
+                            method="POST"
+                            action="/complete-current/{{ department[0] }}"
+                        >
+
+                            <button type="submit">
+                                Complete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="AshuSeva - Public Hospital OPD Queue and Patient Assistance Platform">
+
+    <title>AshuSeva - Public Hospital OPD Assistance</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav class="main-nav">
+
+        <div class="nav-brand">
+            AshuSeva
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/register">
+                Register for OPD
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+
+    <main>
+
+        <section class="hero-section">
+
+            <div class="hero-content">
+
+                <p class="hero-label">
+                    PUBLIC HEALTHCARE ASSISTANCE
+                </p>
+
+                <h1>
+                    Smarter OPD Visits.<br>
+                    Less Waiting.
+                </h1>
+
+                <p class="hero-description">
+                    AshuSeva helps patients register for hospital
+                    OPD services, receive a token, track their queue
+                    and plan their arrival time.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="/register"
+                       class="primary-button">
+                        Register for OPD
+                    </a>
+
+                    <a href="#departments"
+                       class="secondary-button">
+                        View Departments
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Hero Information Card -->
+
+            <div class="hero-card">
+
+                <div class="hero-card-header">
+
+                    <span>Today's OPD</span>
+
+                    <span class="open-status">
+                        ● Open
+                    </span>
+
+                </div>
+
+                <div class="hero-card-time">
+                    8:00 AM
+                </div>
+
+                <p>
+                    OPD consultation begins at 8:00 AM
+                </p>
+
+
+                <div class="hero-card-info">
+
+                    <div>
+                        <strong>5 min</strong>
+                        <span>Avg. consultation</span>
+                    </div>
+
+                    <div>
+                        <strong>10 min</strong>
+                        <span>Arrival buffer</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- How It Works -->
+
+        <section class="how-section">
+
+            <div class="section-heading">
+
+                <p class="hero-label">
+                    SIMPLE PROCESS
+                </p>
+
+                <h2>
+                    How AshuSeva Works
+                </h2>
+
+                <p>
+                    A simple way to plan your hospital OPD visit.
+                </p>
+
+            </div>
+
+
+            <div class="steps-grid">
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Register
+                    </h3>
+
+                    <p>
+                        Enter your basic details and select
+                        the required OPD department.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Get Your Token
+                    </h3>
+
+                    <p>
+                        Receive your department-wise OPD token
+                        after successful registration.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Track Your Queue
+                    </h3>
+
+                    <p>
+                        See the current queue, patients ahead
+                        and estimated waiting time.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Arrive on Time
+                    </h3>
+
+                    <p>
+                        Use the recommended arrival time to
+                        reduce unnecessary waiting.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Departments -->
+
+        <section class="departments-section"
+                 id="departments">
+
+            <div class="section-heading">
+
+                <p class="hero-label">
+                    OPD SERVICES
+                </p>
+
+                <h2>
+                    Hospital Departments
+                </h2>
+
+                <p>
+                    Select the appropriate department during
+                    patient registration.
+                </p>
+
+            </div>
+
+
+            <div class="home-department-grid">
+
+                {% for department in departments %}
+
+                    <div class="home-department-card">
+
+    <a href="/register" class="department-icon">
+        +
+    </a>
+
+    <h3>
+        {{ department[1] }}
+    </h3>
+
+    <p>
+        OPD Consultation
+    </p>
+
+</div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+        <!-- Check Token Status -->
+
+<section class="token-check-section">
+
+    <div class="section-heading">
+
+        <p class="hero-label">
+            LIVE QUEUE
+        </p>
+
+        <h2>
+            Check My Token Status
+        </h2>
+
+        <p>
+            Already registered? Enter your token number
+            to view your live OPD queue status.
+        </p>
+
+    </div>
+
+
+    <div class="token-check-card">
+
+        <form id="tokenCheckForm">
+
+            <label for="tokenNumber">
+                Enter Your Token Number
+            </label>
+
+            <input
+                type="text"
+                id="tokenNumber"
+                placeholder="Example: C-017"
+                required
+            >
+
+            <button type="submit">
+                Check My Status
+            </button>
+
+        </form>
+
+        <p class="token-help">
+            Your token number was provided after OPD registration.
+        </p>
+
+    </div>
+
+</section>
+        <!-- Call To Action -->
+
+        <section class="cta-section">
+
+            <h2>
+                Ready to register for your OPD visit?
+            </h2>
+
+            <p>
+                Register now and keep track of your queue
+                from anywhere.
+            </p>
+
+            <a href="/register"
+               class="primary-button">
+                Get My OPD Token
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="home-footer">
+
+        <h3>
+            AshuSeva
+        </h3>
+
+        <p>
+            Public Hospital OPD Queue & Patient Assistance Platform
+        </p>
+
+        <p>
+            An initiative by Ashutosh People Welfare
+        </p>
+
+        <div class="footer-line"></div>
+
+        <p>
+            © 2026 AshuSeva. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

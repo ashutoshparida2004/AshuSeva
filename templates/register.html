@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Patient Registration - AshuSeva</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <nav class="main-nav">
+
+    <div class="nav-brand">
+        AshuSeva
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+    </div>
+
+</nav>
+
+    <div class="queue-page">
+
+        <!-- Header -->
+
+        <header class="queue-header">
+
+            <h1>AshuSeva</h1>
+
+            <p>
+                Public Hospital OPD Queue & Patient Assistance
+            </p>
+
+        </header>
+
+
+        <!-- Registration Card -->
+
+        <main class="patient-queue-card">
+
+            <h2>Patient Registration</h2>
+
+            <p>
+                Enter your details to receive your OPD token.
+            </p>
+
+
+            <form method="POST" action="/register">
+
+
+                <!-- Name -->
+
+                <div>
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <br><br>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+                <br>
+
+
+                <!-- Age -->
+
+                <div>
+
+                    <label for="age">
+                        Age
+                    </label>
+
+                    <br><br>
+
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        min="1"
+                        max="120"
+                        placeholder="Enter your age"
+                        required
+                    >
+
+                </div>
+
+                <br>
+
+
+                <!-- Gender -->
+
+                <div>
+
+                    <label for="gender">
+                        Gender
+                    </label>
+
+                    <br><br>
+
+                    <select
+                        id="gender"
+                        name="gender"
+                        required
+                    >
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <br>
+
+
+                <!-- Phone -->
+
+                <div>
+
+                    <label for="phone">
+                        Mobile Number
+                    </label>
+
+                    <br><br>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        placeholder="10-digit mobile number"
+                        required
+                    >
+
+                </div>
+
+                <br>
+
+
+                <!-- Department -->
+
+                <div>
+
+                    <label for="department">
+                        OPD Department
+                    </label>
+
+                    <br><br>
+
+                    <select
+                        id="department"
+                        name="department_id"
+                        required
+                    >
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        {% for department in departments %}
+
+                            <option value="{{ department[0] }}">
+                                {{ department[1] }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <br><br>
+
+
+                <!-- Information -->
+
+                <div class="patient-message">
+
+                    <p>
+                        🕗 OPD starts at <strong>8:00 AM</strong>.
+                    </p>
+
+                    <p>
+                        ⏱️ Estimated consultation time is
+                        <strong>5 minutes</strong> per patient.
+                    </p>
+
+                    <p>
+                        📱 After registration, you will receive your
+                        OPD token and queue information.
+                    </p>
+
+                </div>
+
+                <br>
+
+
+                <!-- Submit -->
+
+                <button type="submit">
+                    Get My OPD Token
+                </button>
+
+            </form>
+
+        </main>
+
+
+        <p class="refresh-message">
+            AshuSeva — Making hospital visits simpler.
+        </p>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ASHUTOSH SEVA</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <nav class="main-nav">
+
+    <div class="nav-brand">
+        AshuSeva
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+    </div>
+
+</nav>
+
+    <div class="queue-page">
+
+        <!-- Header -->
+
+        <header class="queue-header">
+
+            <h1>ASHUTOSH SEVA</h1>
+
+            <p>Live OPD Queue Status</p>
+
+        </header>
+
+
+        <!-- Patient Queue Card -->
+
+        <main class="patient-queue-card">
+
+            <h2>{{ department_name }}</h2>
+
+
+            <!-- Token -->
+
+            <div class="token-section">
+
+    <p>Your Token</p>
+
+    <div class="token-number">
+        {{ token_number }}
+    </div>
+
+</div>
+
+
+<div class="patient-details">
+
+    <div class="patient-detail">
+
+        <span>Patient Name</span>
+
+        <strong>
+            {{ patient_name }}
+        </strong>
+
+    </div>
+
+
+    <div class="patient-detail">
+
+        <span>Age</span>
+
+        <strong>
+            {{ patient_age }} years
+        </strong>
+
+    </div>
+
+</div>
+
+
+            <!-- Queue Information -->
+
+            <div class="queue-info">
+
+
+                <!-- Status -->
+
+                <div class="queue-item">
+
+                    <span>Status</span>
+
+                    {% if status == "Waiting" %}
+
+                        <strong class="status-badge status-waiting">
+                            Waiting
+                        </strong>
+
+                    {% elif status == "Serving" %}
+
+                        <strong class="status-badge status-serving">
+                            Serving
+                        </strong>
+
+                    {% elif status == "Completed" %}
+
+                        <strong class="status-badge status-completed">
+                            Completed
+                        </strong>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Now Serving -->
+
+                <div class="queue-item">
+
+                    <span>Now Serving</span>
+
+                    <strong>
+                        {{ now_serving }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Patients Ahead -->
+
+                <div class="queue-item">
+
+                    <span>Patients Ahead</span>
+
+                    <strong>
+                        {{ patients_ahead }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Estimated Waiting Time -->
+
+                <div class="highlight-item">
+
+                    <span>Estimated Waiting Time</span>
+
+                    <strong>
+                        {{ estimated_wait }} minutes
+                    </strong>
+
+                </div>
+
+
+                <!-- Estimated Turn -->
+
+                <div class="highlight-item">
+
+                    <span>Estimated Turn Time</span>
+
+                    <strong>
+                        {{ estimated_turn_time }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Recommended Arrival -->
+
+                <div class="highlight-item">
+
+                    <span>Recommended Arrival</span>
+
+                    <strong>
+                        {{ recommended_arrival_time }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Patient Message -->
+
+        <div class="patient-message">
+
+    {% if status == "Waiting" %}
+
+        <p>
+            ⏳ Please wait for your turn.
+        </p>
+
+        <p>
+            You can arrive around
+            <strong>{{ recommended_arrival_time }}</strong>
+            to avoid unnecessary waiting.
+        </p>
+
+
+    {% elif status == "Serving" %}
+
+        <p>
+            🎉 It is your turn!
+        </p>
+
+        <p>
+            Please proceed to the consultation area.
+        </p>
+
+
+    {% elif status == "Completed" %}
+
+        <p>
+            ✅ Your consultation has been completed.
+        </p>
+
+        <p>
+            Thank you for visiting AshuSeva.
+        </p>
+
+    {% endif %}
+
+</div> 
+
+        </main>
+
+
+        <!-- Auto Refresh -->
+
+        <p class="refresh-message">
+
+            🔄 Queue updates automatically every 5 seconds.
+
+        </p>
+
+    </div>
+
+
+    <script>
+
+        setTimeout(function() {
+
+            location.reload();
+
+        }, 5000);
+
+    </script>
+
+</body>
+
+</html>
